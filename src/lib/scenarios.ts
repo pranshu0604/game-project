@@ -59,18 +59,18 @@ export const CATEGORIES = [
 ];
 
 export const CATEGORY_COLORS: Record<string, string> = {
-  sales: "#C9A84C",
-  compliance: "#E53E3E",
-  "customer-service": "#4299E1",
-  fraud: "#D69E2E",
-  operations: "#38A169",
+  sales: "#2563EB",
+  compliance: "#DC2626",
+  "customer-service": "#3B82F6",
+  fraud: "#D97706",
+  operations: "#16A34A",
 };
 
 export const DIFFICULTY_CONFIG = {
-  easy: { label: "TRAINEE", color: "#38A169", stars: 1 },
-  medium: { label: "JUNIOR RM", color: "#D69E2E", stars: 2 },
-  hard: { label: "SENIOR RM", color: "#E53E3E", stars: 3 },
-  expert: { label: "BRANCH MGR", color: "#9F7AEA", stars: 4 },
+  easy: { label: "TRAINEE", color: "#16A34A", stars: 1 },
+  medium: { label: "JUNIOR RM", color: "#D97706", stars: 2 },
+  hard: { label: "SENIOR RM", color: "#DC2626", stars: 3 },
+  expert: { label: "BRANCH MGR", color: "#7C3AED", stars: 4 },
 };
 
 export const SCENARIOS: Scenario[] = [

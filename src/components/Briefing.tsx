@@ -165,7 +165,7 @@ export function Briefing() {
                 </div>
               </div>
 
-              <div className="nexus-card p-4" style={{ borderTop: "2px solid rgba(229,62,62,0.3)" }}>
+              <div className="nexus-card p-4" style={{ borderTop: "2px solid rgba(220,38,38,0.3)" }}>
                 <div className="flex items-center gap-2 mb-2">
                   <AlertTriangle size={12} style={{ color: "var(--danger)" }} />
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: 700, letterSpacing: "2px", color: "var(--danger)" }}>COMPLIANCE</span>
@@ -229,8 +229,8 @@ export function Briefing() {
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-3 px-6 py-3 rounded-xl transition-all"
             style={{
-              background: "rgba(56,161,105,0.06)",
-              border: "1px solid rgba(56,161,105,0.2)",
+              background: "rgba(22,163,74,0.06)",
+              border: "1px solid rgba(22,163,74,0.2)",
               color: "var(--success)",
             }}
           >
@@ -248,8 +248,8 @@ export function Briefing() {
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-3 px-6 py-3 rounded-xl transition-all"
             style={{
-              background: "rgba(201,168,76,0.06)",
-              border: "1px solid var(--accent-gold-border)",
+              background: "rgba(37,99,235,0.06)",
+              border: "1px solid var(--accent-primary-border)",
               color: "var(--warn)",
             }}
           >
@@ -270,7 +270,7 @@ export function Briefing() {
             <Award size={16} />
             <div className="text-left">
               <p className="text-xs font-bold">TEST ME</p>
-              <p className="text-[9px] opacity-70" style={{ color: "var(--bg-void)" }}>Get evaluated</p>
+              <p className="text-[9px] opacity-80" style={{ color: "#FFFFFF" }}>Get evaluated</p>
             </div>
           </motion.button>
         </div>

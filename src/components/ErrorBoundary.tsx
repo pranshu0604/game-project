@@ -32,7 +32,7 @@ export class ErrorBoundary extends Component<Props, State> {
         <div className="h-screen w-full flex items-center justify-center" style={{ background: "var(--bg-void)" }}>
           <div className="text-center max-w-md px-6">
             <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
-              style={{ background: "rgba(229,62,62,0.1)", border: "1px solid rgba(229,62,62,0.2)" }}>
+              style={{ background: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.2)" }}>
               <AlertTriangle size={28} style={{ color: "var(--danger)" }} />
             </div>
             <h2 className="text-lg font-bold mb-2" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>

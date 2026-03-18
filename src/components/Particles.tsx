@@ -27,11 +27,11 @@ export function Particles({ count = 15 }: { count?: number }) {
             bottom: "-10px",
             width: p.size,
             height: p.size,
-            background: "var(--accent-gold)",
+            background: "var(--accent-primary)",
             opacity: p.opacity,
             animationDuration: `${p.duration}s`,
             animationDelay: `${p.delay}s`,
-            boxShadow: `0 0 ${p.size * 3}px rgba(201,168,76,0.3)`,
+            boxShadow: `0 0 ${p.size * 3}px rgba(37,99,235,0.3)`,
           }}
         />
       ))}

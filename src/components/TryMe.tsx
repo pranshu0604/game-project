@@ -8,7 +8,7 @@ import { Particles } from "./Particles";
 import { SplitLayout } from "./SplitLayout";
 import { TryMeInsights } from "./insights/TryMeInsights";
 import {
-  ArrowLeft, ArrowUp, Clock, ChevronRight, MessageSquare,
+  ArrowLeft, ArrowUp, Clock, ChevronRight, MessageSquare, Target,
 } from "lucide-react";
 
 function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = 25000): Promise<Response> {
@@ -34,9 +34,11 @@ export function TryMe() {
   const [elapsed, setElapsed] = useState(0);
   const [responseCount, setResponseCount] = useState(0);
   const [moodHistory, setMoodHistory] = useState<number[]>([]);
+  const [coachingStep, setCoachingStep] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const initialized = useRef(false);
+  const shownCoaching = useRef<Set<number>>(new Set());
 
   // Init mood history
   useEffect(() => {
@@ -55,17 +57,27 @@ export function TryMe() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Initial customer message
+  // Initial customer message + first coaching objective
   useEffect(() => {
     if (!sc || initialized.current) return;
     initialized.current = true;
-    setMessages([
-      {
+
+    const initMessages: ChatMessage[] = [
+      { id: crypto.randomUUID(), role: "customer", content: sc.openingStatement },
+    ];
+
+    // Show first system objective as coaching
+    const firstSystemStep = sc.steps.find(s => s.speaker === "system");
+    if (firstSystemStep && !shownCoaching.current.has(0)) {
+      shownCoaching.current.add(0);
+      initMessages.push({
         id: crypto.randomUUID(),
-        role: "customer",
-        content: sc.openingStatement,
-      },
-    ]);
+        role: "system",
+        content: firstSystemStep.text,
+      });
+    }
+
+    setMessages(initMessages);
   }, [sc]);
 
   const fetchCustomerResponse = useCallback(async (userText: string) => {
@@ -98,11 +110,26 @@ export function TryMe() {
         setMoodHistory(prev => [...prev, currentMood]);
       }
 
-      setMessages((prev) => [...prev, {
+      const newMessages: ChatMessage[] = [{
         id: crypto.randomUUID(),
         role: "customer",
         content: response,
-      }]);
+      }];
+
+      // Show next coaching objective after customer responds
+      const nextCoachingIdx = coachingStep + 1;
+      const systemSteps = sc.steps.filter(s => s.speaker === "system");
+      if (nextCoachingIdx < systemSteps.length && !shownCoaching.current.has(nextCoachingIdx)) {
+        shownCoaching.current.add(nextCoachingIdx);
+        newMessages.push({
+          id: crypto.randomUUID(),
+          role: "system",
+          content: systemSteps[nextCoachingIdx].text,
+        });
+        setCoachingStep(nextCoachingIdx);
+      }
+
+      setMessages((prev) => [...prev, ...newMessages]);
 
       if (data.conversationEnd) {
         setTimeout(() => setEnded(true), 1000);
@@ -174,7 +201,17 @@ export function TryMe() {
         {messages.map((msg) => (
           <motion.div key={msg.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", damping: 22 }}>
-            {msg.role === "customer" ? (
+            {msg.role === "system" ? (
+              <div className="chat-system p-4">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Target size={12} style={{ color: "var(--accent-gold)" }} />
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, letterSpacing: "2px", color: "var(--accent-gold)" }}>COACHING</span>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text-primary)" }}>
+                  {msg.content.replace("OBJECTIVE: ", "")}
+                </p>
+              </div>
+            ) : msg.role === "customer" ? (
               <div className="max-w-[85%]">
                 <p className="text-[9px] font-semibold uppercase tracking-widest mb-1.5" style={{ fontFamily: "var(--font-mono)", color: catColor }}>
                   {sc.customer.name}
@@ -232,7 +269,7 @@ export function TryMe() {
         <div className="relative rounded-xl" style={{
           background: "var(--bg-surface)",
           border: "1px solid var(--accent-gold-border)",
-          boxShadow: "0 0 20px rgba(201,168,76,0.04), 0 4px 24px rgba(0,0,0,0.4)",
+          boxShadow: "0 0 20px rgba(37,99,235,0.06), 0 4px 24px rgba(0,0,0,0.08)",
         }}>
           <div className="flex items-end gap-3 px-5 pt-4 pb-2">
             <textarea
@@ -251,8 +288,8 @@ export function TryMe() {
               whileTap={input.trim() ? { scale: 0.9 } : {}}
               className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center mb-0.5"
               style={{
-                background: input.trim() ? "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" : "rgba(255,255,255,0.04)",
-                color: input.trim() ? "var(--bg-void)" : "var(--text-ghost)",
+                background: input.trim() ? "linear-gradient(135deg, var(--accent-primary), var(--accent-primary-glow))" : "var(--bg-elevated)",
+                color: input.trim() ? "#FFFFFF" : "var(--text-secondary)",
               }}>
               <ArrowUp size={16} strokeWidth={2.5} />
             </motion.button>
@@ -281,6 +318,7 @@ export function TryMe() {
             mood={mood}
             moodHistory={moodHistory}
             responseCount={responseCount}
+            coachingStep={coachingStep}
           />
         }
         insightsPanelTitle="PRACTICE COACH"

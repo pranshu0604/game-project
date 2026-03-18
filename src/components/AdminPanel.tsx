@@ -56,7 +56,7 @@ const labelStyle: React.CSSProperties = {
   fontWeight: 700,
   letterSpacing: "1.5px",
   textTransform: "uppercase" as const,
-  color: "var(--text-ghost)",
+  color: "var(--text-secondary)",
   fontFamily: "var(--font-mono)",
   marginBottom: 6,
 };
@@ -345,9 +345,9 @@ export function AdminPanel() {
                       <button key={s.n} onClick={() => setStep(s.n)}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider transition-all"
                         style={{
-                          background: active ? "rgba(201,168,76,0.1)" : done ? "rgba(56,161,105,0.06)" : "transparent",
-                          border: active ? "1px solid var(--accent-gold-border)" : "1px solid var(--border)",
-                          color: active ? "var(--accent-gold)" : done ? "var(--success)" : "var(--text-ghost)",
+                          background: active ? "rgba(37,99,235,0.1)" : done ? "rgba(22,163,74,0.06)" : "transparent",
+                          border: active ? "1px solid var(--accent-primary-border)" : "1px solid var(--border)",
+                          color: active ? "var(--accent-primary)" : done ? "var(--success)" : "var(--text-ghost)",
                         }}>
                         {done ? <CheckCircle size={10} /> : <Icon size={10} />}
                         {s.title}
@@ -571,7 +571,7 @@ export function AdminPanel() {
                 {/* Step 5: Compliance */}
                 {step === 5 && (
                   <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-4">
-                    <div className="nexus-card p-5" style={{ borderTop: "2px solid rgba(229,62,62,0.3)" }}>
+                    <div className="nexus-card p-5" style={{ borderTop: "2px solid rgba(220,38,38,0.3)" }}>
                       <h3 className="text-sm font-bold mb-1" style={{ color: "var(--text-primary)" }}>Compliance Rules</h3>
                       <p className="text-[10px] mb-4" style={{ color: "var(--text-ghost)" }}>
                         Phrases that trigger instant compliance violations.

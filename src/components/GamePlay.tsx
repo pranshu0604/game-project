@@ -55,18 +55,17 @@ export function GamePlay() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Show system objective message when step changes — ref prevents duplicates
+  // Advance when step changes — no objective shown in test mode (it's a test!)
   useEffect(() => {
     if (!sc) return;
     const step = sc.steps[currentStepIndex];
     if (step && step.speaker === "system" && !shownSystemSteps.current.has(currentStepIndex)) {
       shownSystemSteps.current.add(currentStepIndex);
       setTimeout(() => {
-        addMessage({ role: "system", content: step.text, stepIndex: currentStepIndex });
         setWaitingForUser(true);
       }, 800);
     }
-  }, [currentStepIndex, sc, addMessage]);
+  }, [currentStepIndex, sc]);
 
   // Auto-focus input
   useEffect(() => {
@@ -373,22 +372,12 @@ export function GamePlay() {
     <div className="w-full h-full relative">
       <Particles count={4} />
       <div className="w-full max-w-2xl mx-auto px-6 py-6 space-y-4 relative z-10" style={{ minHeight: "100%" }}>
-        {messages.map((msg) => (
+        {messages.filter(m => m.role !== "system").map((msg) => (
           <motion.div key={msg.id}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", damping: 22 }}
           >
-            {msg.role === "system" ? (
-              <div className="chat-system p-4">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Target size={12} style={{ color: "var(--accent-gold)" }} />
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, letterSpacing: "2px", color: "var(--accent-gold)" }}>YOUR OBJECTIVE</span>
-                </div>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--text-primary)" }}>
-                  {msg.content.replace("OBJECTIVE: ", "")}
-                </p>
-              </div>
-            ) : msg.role === "compliance" ? (
+            {msg.role === "compliance" ? (
               <motion.div initial={{ x: -10 }} animate={{ x: 0 }} className="compliance-alert p-4">
                 <div className="flex items-center gap-2 mb-1.5">
                   <AlertTriangle size={12} style={{ color: "var(--danger)" }} />
@@ -443,7 +432,7 @@ export function GamePlay() {
           style={{
             background: "var(--bg-surface)",
             border: `1px solid ${waitingForUser ? "var(--accent-gold-border)" : "var(--border)"}`,
-            boxShadow: waitingForUser ? "0 0 20px rgba(201,168,76,0.04), 0 4px 24px rgba(0,0,0,0.4)" : "0 4px 24px rgba(0,0,0,0.4)",
+            boxShadow: waitingForUser ? "0 0 20px rgba(37,99,235,0.06), 0 4px 24px rgba(0,0,0,0.08)" : "0 4px 24px rgba(0,0,0,0.06)",
           }}>
           <div className="flex items-end gap-3 px-5 pt-4 pb-2">
             <textarea
@@ -466,8 +455,8 @@ export function GamePlay() {
               aria-label="Send response"
               className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all mb-0.5"
               style={{
-                background: input.trim() && waitingForUser ? "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" : "rgba(255,255,255,0.04)",
-                color: input.trim() && waitingForUser ? "var(--bg-void)" : "var(--text-ghost)",
+                background: input.trim() && waitingForUser ? "linear-gradient(135deg, var(--accent-primary), var(--accent-primary-glow))" : "var(--bg-elevated)",
+                color: input.trim() && waitingForUser ? "#FFFFFF" : "var(--text-secondary)",
               }}
             >
               <ArrowUp size={16} strokeWidth={2.5} />

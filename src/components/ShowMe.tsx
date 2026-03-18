@@ -144,7 +144,7 @@ export function ShowMe() {
                   style={{ fontFamily: "var(--font-mono)", color: "var(--success)" }}>
                   IDEAL RM <CheckCircle size={9} className="inline ml-1" />
                 </p>
-                <div className="p-4 rounded-xl" style={{ background: "rgba(56,161,105,0.06)", border: "1px solid rgba(56,161,105,0.15)" }}>
+                <div className="p-4 rounded-xl" style={{ background: "rgba(22,163,74,0.06)", border: "1px solid rgba(22,163,74,0.15)" }}>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--text-primary)" }}>{ex.text}</p>
                 </div>
               </div>

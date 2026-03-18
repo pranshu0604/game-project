@@ -87,9 +87,9 @@ export function Evaluation() {
   const hasViolations = ev.complianceViolations && ev.complianceViolations.length > 0;
 
   const gradeColors: Record<string, string> = {
-    S: "#FFD700", A: "#38A169", B: "#4299E1", C: "#D69E2E", D: "#E53E3E", F: "#E53E3E",
+    S: "#2563EB", A: "#16A34A", B: "#3B82F6", C: "#D97706", D: "#DC2626", F: "#DC2626",
   };
-  const gradeColor = gradeColors[ev.grade] || "var(--accent-gold)";
+  const gradeColor = gradeColors[ev.grade] || "var(--accent-primary)";
 
   return (
     <motion.div
@@ -257,15 +257,15 @@ export function Evaluation() {
                   <Radar
                     name="Ideal"
                     dataKey="ideal"
-                    stroke="rgba(201,168,76,0.2)"
-                    fill="rgba(201,168,76,0.05)"
+                    stroke="rgba(37,99,235,0.2)"
+                    fill="rgba(37,99,235,0.05)"
                     strokeDasharray="4 4"
                   />
                   <Radar
                     name="Your Score"
                     dataKey="score"
-                    stroke="var(--accent-gold)"
-                    fill="rgba(201,168,76,0.15)"
+                    stroke="var(--accent-primary)"
+                    fill="rgba(37,99,235,0.15)"
                     strokeWidth={2}
                   />
                 </RadarChart>
@@ -281,7 +281,7 @@ export function Evaluation() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
               className="nexus-card p-5"
-              style={{ borderTop: "2px solid rgba(56,161,105,0.3)" }}
+              style={{ borderTop: "2px solid rgba(22,163,74,0.3)" }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <TrendingUp size={13} style={{ color: "var(--success)" }} />
@@ -309,7 +309,7 @@ export function Evaluation() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.45 }}
               className="nexus-card p-5"
-              style={{ borderTop: "2px solid rgba(214,158,46,0.3)" }}
+              style={{ borderTop: "2px solid rgba(217,119,6,0.3)" }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <TrendingDown size={13} style={{ color: "var(--warn)" }} />
@@ -341,7 +341,7 @@ export function Evaluation() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5 }}
                   className="nexus-card p-5"
-                  style={{ borderTop: "2px solid rgba(56,161,105,0.3)" }}
+                  style={{ borderTop: "2px solid rgba(22,163,74,0.3)" }}
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <Award size={13} style={{ color: "var(--success)" }} />
@@ -360,7 +360,7 @@ export function Evaluation() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.55 }}
                   className="nexus-card p-5"
-                  style={{ borderTop: "2px solid rgba(229,62,62,0.3)" }}
+                  style={{ borderTop: "2px solid rgba(220,38,38,0.3)" }}
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <AlertTriangle size={13} style={{ color: "var(--danger)" }} />
@@ -382,7 +382,7 @@ export function Evaluation() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.55 }}
             className="nexus-card p-5 mb-6"
-            style={{ borderTop: hasViolations ? "2px solid rgba(229,62,62,0.3)" : "2px solid rgba(56,161,105,0.3)" }}
+            style={{ borderTop: hasViolations ? "2px solid rgba(220,38,38,0.3)" : "2px solid rgba(22,163,74,0.3)" }}
           >
             <div className="flex items-center gap-2 mb-3">
               <Shield size={13} style={{ color: hasViolations ? "var(--danger)" : "var(--success)" }} />
@@ -460,7 +460,7 @@ export function Evaluation() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.63 }}
               className="nexus-card p-5 mb-6"
-              style={{ borderTop: "2px solid rgba(201,168,76,0.2)" }}
+              style={{ borderTop: "2px solid rgba(37,99,235,0.2)" }}
             >
               <div className="flex items-center gap-2 mb-4">
                 <Target size={13} style={{ color: "var(--accent-gold)" }} />
@@ -470,7 +470,7 @@ export function Evaluation() {
               </div>
               <div className="space-y-4">
                 {ev.ghostResponses.map((ghost, i) => (
-                  <div key={i} className="rounded-lg p-4" style={{ background: "rgba(201,168,76,0.03)", border: "1px solid var(--border)" }}>
+                  <div key={i} className="rounded-lg p-4" style={{ background: "rgba(37,99,235,0.03)", border: "1px solid var(--border)" }}>
                     <p className="text-[9px] font-semibold uppercase tracking-wider mb-2" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>
                       STEP {ghost.step}
                     </p>

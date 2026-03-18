@@ -40,7 +40,7 @@ export function SplitLayout({
         <div className={`split-insights ${mobileOpen ? "open" : ""}`}>
           <div className="sticky top-0 z-10 px-4 py-3 flex items-center justify-between"
             style={{
-              background: "rgba(7,10,15,0.95)",
+              background: "rgba(255,255,255,0.95)",
               backdropFilter: "blur(12px)",
               borderBottom: "1px solid var(--border)",
             }}>

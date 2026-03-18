@@ -43,7 +43,7 @@ export default function Home() {
             className="w-16 h-16 rounded-xl mx-auto mb-4 flex items-center justify-center"
             style={{ background: "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" }}
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#070A0F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
               <rect width="20" height="14" x="2" y="6" rx="2" />
             </svg>
@@ -66,7 +66,7 @@ export default function Home() {
           className="fixed top-0 left-1/2 -translate-x-1/2 pointer-events-none"
           style={{
             width: 1000, height: 500,
-            background: "radial-gradient(ellipse at center, rgba(201,168,76,0.03) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at center, rgba(37,99,235,0.04) 0%, transparent 70%)",
           }}
         />
 

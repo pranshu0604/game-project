@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { Scenario } from "@/lib/scenarios";
 import { CATEGORY_COLORS } from "@/lib/scenarios";
 import {
-  User, Shield, MessageSquare,
+  User, Shield, MessageSquare, Target, Lightbulb,
   TrendingUp, TrendingDown, Minus, CheckSquare,
 } from "lucide-react";
 
@@ -13,9 +13,10 @@ interface TryMeInsightsProps {
   mood: number;
   moodHistory: number[];
   responseCount: number;
+  coachingStep: number;
 }
 
-export function TryMeInsights({ scenario: sc, mood, moodHistory, responseCount }: TryMeInsightsProps) {
+export function TryMeInsights({ scenario: sc, mood, moodHistory, responseCount, coachingStep }: TryMeInsightsProps) {
   const catColor = CATEGORY_COLORS[sc.category] || "var(--accent-gold)";
   const moodColor = mood <= 3 ? "var(--danger)" : mood <= 6 ? "var(--warn)" : "var(--success)";
   const lastDelta = moodHistory.length >= 2
@@ -28,8 +29,83 @@ export function TryMeInsights({ scenario: sc, mood, moodHistory, responseCount }
     mood <= 7 ? "Client is warming up to you" :
     mood <= 9 ? "Client trusts you" : "Client is fully engaged";
 
+  // Get current coaching step data
+  const systemSteps = sc.steps.filter(s => s.speaker === "system");
+  const currentCoachingStep = systemSteps[coachingStep];
+  const currentHints = currentCoachingStep?.hints || [];
+
   return (
     <>
+      {/* Current Coaching Objective */}
+      {currentCoachingStep && (
+        <motion.div
+          key={coachingStep}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="insight-card insight-card-active"
+        >
+          <div className="insight-card-header" style={{ color: "var(--accent-gold)" }}>
+            <Target size={11} /> CURRENT OBJECTIVE
+          </div>
+          <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--text-primary)" }}>
+            {currentCoachingStep.text.replace("OBJECTIVE: ", "")}
+          </p>
+          {currentCoachingStep.expectedAction && (
+            <p className="text-[10px] leading-relaxed px-3 py-2 rounded-lg" style={{
+              background: "var(--accent-primary-bg)",
+              border: "1px solid var(--accent-primary-border)",
+              color: "var(--text-secondary)",
+            }}>
+              <strong style={{ color: "var(--accent-primary)" }}>Expected:</strong> {currentCoachingStep.expectedAction}
+            </p>
+          )}
+          {/* Step progress */}
+          <div className="flex items-center gap-2 mt-3">
+            <span className="text-[10px]" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>
+              ROUND {Math.min(coachingStep + 1, systemSteps.length)}/{systemSteps.length}
+            </span>
+            <div className="flex items-center gap-1.5 flex-1">
+              {Array.from({ length: systemSteps.length }).map((_, i) => (
+                <div key={i} style={{
+                  flex: 1, height: 3, borderRadius: 2,
+                  background: i < coachingStep ? "var(--success)" : i === coachingStep ? "var(--accent-gold)" : "var(--border)",
+                  boxShadow: i === coachingStep ? "0 0 6px var(--accent-gold)" : "none",
+                  transition: "all 0.3s ease",
+                }} />
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Hints */}
+      {currentHints.length > 0 && (
+        <div className="insight-card">
+          <div className="insight-card-header" style={{ color: "var(--warn)" }}>
+            <Lightbulb size={11} /> HINTS
+          </div>
+          <div className="space-y-1.5">
+            {currentHints.map((hint, i) => (
+              <div key={i} className="flex items-start gap-2 text-[11px] leading-relaxed"
+                style={{ color: "var(--warn)" }}>
+                <span style={{ color: "var(--warn)", opacity: 0.5 }}>›</span>
+                {hint}
+              </div>
+            ))}
+            {currentCoachingStep?.idealKeywords && (
+              <div className="flex flex-wrap gap-1.5 mt-2 pt-2" style={{ borderTop: "1px solid var(--border)" }}>
+                {currentCoachingStep.idealKeywords.map((kw, i) => (
+                  <span key={i} className="text-[9px] px-2 py-0.5 rounded-full"
+                    style={{ background: "var(--warn-bg)", color: "var(--warn)", border: "1px solid rgba(217,119,6,0.15)" }}>
+                    {kw}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Client Dossier */}
       <div className="insight-card" style={{ borderTop: `2px solid ${catColor}30` }}>
         <div className="insight-card-header" style={{ color: catColor }}>
@@ -59,7 +135,7 @@ export function TryMeInsights({ scenario: sc, mood, moodHistory, responseCount }
             <span className="text-[9px]" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>HOT BUTTONS</span>
             {sc.customer.hotButtons.map((btn) => (
               <span key={btn} className="text-[9px] px-2 py-0.5 rounded-full"
-                style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid rgba(229,62,62,0.15)" }}>
+                style={{ background: "var(--danger-bg)", color: "var(--danger)", border: "1px solid rgba(220,38,38,0.15)" }}>
                 {btn}
               </span>
             ))}
@@ -163,9 +239,9 @@ export function TryMeInsights({ scenario: sc, mood, moodHistory, responseCount }
             <span key={phrase} className="text-[9px] px-2 py-1 rounded"
               style={{
                 fontFamily: "var(--font-mono)",
-                background: "rgba(214,158,46,0.06)",
+                background: "rgba(217,119,6,0.06)",
                 color: "var(--warn)",
-                border: "1px solid rgba(214,158,46,0.15)",
+                border: "1px solid rgba(217,119,6,0.15)",
               }}>
               {phrase}
             </span>

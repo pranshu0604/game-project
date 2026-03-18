@@ -55,7 +55,7 @@ export function Lobby() {
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center"
               style={{ background: "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" }}>
-              <Briefcase size={14} color="#070A0F" />
+              <Briefcase size={14} color="#FFFFFF" />
             </div>
             <div>
               <span className="font-bold text-sm tracking-wide" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>
@@ -91,14 +91,14 @@ export function Lobby() {
               </span>
               {career.streak > 0 && (
                 <span className="flex items-center gap-1">
-                  <Flame size={10} style={{ color: "#E53E3E" }} />
+                  <Flame size={10} style={{ color: "#DC2626" }} />
                   <strong style={{ color: "var(--text-primary)" }}>{career.streak}</strong>
                 </span>
               )}
               <button
                 onClick={() => setPhase("leaderboard")}
                 className="flex items-center gap-1 px-2 py-1 rounded-md transition-all hover:opacity-80"
-                style={{ background: "rgba(201,168,76,0.08)", border: "1px solid rgba(201,168,76,0.15)" }}
+                style={{ background: "rgba(37,99,235,0.08)", border: "1px solid rgba(37,99,235,0.15)" }}
               >
                 <Trophy size={10} style={{ color: "var(--accent-gold)" }} />
                 <span style={{ color: "var(--accent-gold)" }}>RANKS</span>
@@ -106,10 +106,10 @@ export function Lobby() {
               <button
                 onClick={() => setPhase("admin")}
                 className="flex items-center gap-1 px-2 py-1 rounded-md transition-all hover:opacity-80"
-                style={{ background: "rgba(159,122,234,0.08)", border: "1px solid rgba(159,122,234,0.15)" }}
+                style={{ background: "rgba(132,204,22,0.08)", border: "1px solid rgba(132,204,22,0.15)" }}
               >
-                <Wrench size={10} style={{ color: "#9F7AEA" }} />
-                <span style={{ color: "#9F7AEA" }}>ADMIN</span>
+                <Wrench size={10} style={{ color: "#65A30D" }} />
+                <span style={{ color: "#65A30D" }}>ADMIN</span>
               </button>
               {career.playerName && (
                 <span className="flex items-center gap-1.5" style={{ color: "var(--text-primary)" }}>
@@ -156,7 +156,7 @@ export function Lobby() {
                     onClick={() => setCategory(cat.id)}
                     className="px-3 py-1.5 rounded-md text-[10px] font-semibold uppercase tracking-wider transition-all flex items-center gap-1.5"
                     style={{
-                      color: active ? "var(--bg-void)" : "var(--text-secondary)",
+                      color: active ? "#FFFFFF" : "var(--text-secondary)",
                       background: active ? "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" : "transparent",
                     }}
                   >
@@ -186,7 +186,7 @@ export function Lobby() {
                   className="case-file cursor-pointer px-5 py-4 flex items-center gap-4"
                   style={{
                     borderColor: isHovered ? "var(--border-accent)" : "var(--border)",
-                    boxShadow: isHovered ? "0 0 20px rgba(201,168,76,0.06), 0 8px 32px rgba(0,0,0,0.3)" : "none",
+                    boxShadow: isHovered ? "0 0 20px rgba(37,99,235,0.08), 0 8px 32px rgba(0,0,0,0.08)" : "none",
                     transform: isHovered ? "translateY(-2px)" : "none",
                     transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
                   }}

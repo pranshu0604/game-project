@@ -85,7 +85,7 @@ export function Login() {
             className="w-16 h-16 rounded-xl mx-auto mb-4 flex items-center justify-center"
             style={{ background: "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" }}
           >
-            <Briefcase size={28} color="#070A0F" />
+            <Briefcase size={28} color="#FFFFFF" />
           </motion.div>
           <h1 className="text-2xl font-bold tracking-wide" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>
             NEXUS BANK

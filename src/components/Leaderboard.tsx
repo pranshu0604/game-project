@@ -46,16 +46,16 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
   };
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Crown size={14} style={{ color: "#FFD700" }} />;
-    if (rank === 2) return <Medal size={14} style={{ color: "#C0C0C0" }} />;
-    if (rank === 3) return <Medal size={14} style={{ color: "#CD7F32" }} />;
+    if (rank === 1) return <Crown size={14} style={{ color: "#2563EB" }} />;
+    if (rank === 2) return <Medal size={14} style={{ color: "#64748B" }} />;
+    if (rank === 3) return <Medal size={14} style={{ color: "#84CC16" }} />;
     return <span className="text-[10px] font-bold" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>#{rank}</span>;
   };
 
   const getRankColor = (rank: number) => {
-    if (rank === 1) return "rgba(255,215,0,0.08)";
-    if (rank === 2) return "rgba(192,192,192,0.06)";
-    if (rank === 3) return "rgba(205,127,50,0.06)";
+    if (rank === 1) return "rgba(37,99,235,0.08)";
+    if (rank === 2) return "rgba(100,116,139,0.06)";
+    if (rank === 3) return "rgba(132,204,22,0.06)";
     return "transparent";
   };
 
@@ -84,7 +84,7 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
                 onClick={() => setFilter(f)}
                 className="px-3 py-1 rounded-md text-[9px] font-semibold uppercase tracking-wider transition-all"
                 style={{
-                  color: filter === f ? "var(--bg-void)" : "var(--text-secondary)",
+                  color: filter === f ? "#FFFFFF" : "var(--text-secondary)",
                   background: filter === f ? "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" : "transparent",
                 }}
               >
@@ -140,8 +140,8 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
                     transition={{ delay: i * 0.03 }}
                     className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
                     style={{
-                      background: isMe ? "rgba(201,168,76,0.08)" : getRankColor(entry.rank),
-                      border: isMe ? "1px solid var(--accent-gold-border)" : "1px solid transparent",
+                      background: isMe ? "rgba(37,99,235,0.08)" : getRankColor(entry.rank),
+                      border: isMe ? "1px solid var(--accent-primary-border)" : "1px solid transparent",
                     }}
                   >
                     <div className="w-8 flex items-center justify-center">
@@ -185,7 +185,7 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
 
                     <div className="w-10 text-center">
                       {entry.streak > 0 && (
-                        <span className="text-xs flex items-center justify-center gap-0.5" style={{ fontFamily: "var(--font-mono)", color: "#E53E3E" }}>
+                        <span className="text-xs flex items-center justify-center gap-0.5" style={{ fontFamily: "var(--font-mono)", color: "#DC2626" }}>
                           <Flame size={9} /> {entry.streak}
                         </span>
                       )}

@@ -336,14 +336,14 @@ export function AdminPanel() {
             ) : (
               <motion.div key="create" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                 {/* Step indicator */}
-                <div className="flex items-center justify-center gap-2 mb-6">
+                <div className="flex items-center justify-center gap-1 sm:gap-2 mb-4 sm:mb-6 flex-wrap">
                   {STEPS_LABEL.map((s) => {
                     const Icon = s.icon;
                     const active = step === s.n;
                     const done = step > s.n;
                     return (
                       <button key={s.n} onClick={() => setStep(s.n)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider transition-all"
+                        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider transition-all"
                         style={{
                           background: active ? "rgba(37,99,235,0.1)" : done ? "rgba(22,163,74,0.06)" : "transparent",
                           border: active ? "1px solid var(--accent-primary-border)" : "1px solid var(--border)",
@@ -371,7 +371,7 @@ export function AdminPanel() {
                           <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Brief description of the scenario..." rows={3}
                             style={{ ...inputStyle, resize: "vertical" as const }} />
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                           <div>
                             <label style={labelStyle}>Category *</label>
                             <select value={category} onChange={e => setCategory(e.target.value)} style={inputStyle}>
@@ -385,7 +385,7 @@ export function AdminPanel() {
                             </select>
                           </div>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                           <div>
                             <label style={labelStyle}>XP Reward</label>
                             <input type="number" value={xpReward} onChange={e => setXpReward(Number(e.target.value))} style={inputStyle} />
@@ -406,7 +406,7 @@ export function AdminPanel() {
                     <div className="nexus-card p-5" style={{ borderTop: `2px solid ${catColor}30` }}>
                       <h3 className="text-sm font-bold mb-4" style={{ color: "var(--text-primary)" }}>Client Profile</h3>
                       <div className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                           <div>
                             <label style={labelStyle}>Client Name *</label>
                             <input value={custName} onChange={e => setCustName(e.target.value)} placeholder="e.g. Rajesh Mehta" style={inputStyle} />
@@ -416,7 +416,7 @@ export function AdminPanel() {
                             <input type="number" value={custAge} onChange={e => setCustAge(Number(e.target.value))} style={inputStyle} />
                           </div>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                           <div>
                             <label style={labelStyle}>Profession *</label>
                             <input value={custProfession} onChange={e => setCustProfession(e.target.value)} placeholder="e.g. IT Manager" style={inputStyle} />
@@ -437,7 +437,7 @@ export function AdminPanel() {
                           <input value={custGoal} onChange={e => setCustGoal(e.target.value)}
                             placeholder="e.g. Wants to invest 10L in mutual funds but fears losing money" style={inputStyle} />
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                           <div>
                             <label style={labelStyle}>Archetype</label>
                             <select value={custArchetype} onChange={e => setCustArchetype(e.target.value)} style={inputStyle}>
@@ -510,7 +510,7 @@ export function AdminPanel() {
                               placeholder={s.speaker === "customer" ? "What the client says..." : "Objective for the RM (e.g. Discover the client's risk appetite)"}
                               rows={2} style={{ ...inputStyle, fontSize: 12, resize: "vertical" as const }} />
                             {s.speaker === "system" && (
-                              <div className="grid grid-cols-2 gap-2 mt-2">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                                 <input value={s.expectedAction} onChange={e => updateStep(i, "expectedAction", e.target.value)}
                                   placeholder="Expected RM action" style={{ ...inputStyle, fontSize: 11, padding: "6px 10px" }} />
                                 <input value={s.hints} onChange={e => updateStep(i, "hints", e.target.value)}
@@ -594,7 +594,7 @@ export function AdminPanel() {
                     {/* Preview summary */}
                     <div className="nexus-card p-5" style={{ borderTop: `2px solid ${catColor}30` }}>
                       <h3 className="text-sm font-bold mb-3" style={{ color: "var(--accent-gold)" }}>Scenario Preview</h3>
-                      <div className="grid grid-cols-2 gap-3 text-xs" style={{ fontFamily: "var(--font-mono)" }}>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs" style={{ fontFamily: "var(--font-mono)" }}>
                         <div><span style={{ color: "var(--text-ghost)" }}>TITLE</span><p style={{ color: "var(--text-primary)" }}>{title || "—"}</p></div>
                         <div><span style={{ color: "var(--text-ghost)" }}>CATEGORY</span><p style={{ color: catColor }}>{category}</p></div>
                         <div><span style={{ color: "var(--text-ghost)" }}>CLIENT</span><p style={{ color: "var(--text-primary)" }}>{custName || "—"}, {custAge}, {custCity}</p></div>

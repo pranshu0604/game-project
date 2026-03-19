@@ -70,7 +70,7 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
 
       {/* TOP BAR */}
       <div className="relative z-10 shrink-0 glass-panel" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="px-6 py-3 flex items-center justify-between">
+        <div className="px-3 sm:px-6 py-3 flex items-center justify-between gap-2">
           <button onClick={onClose} className="btn-ghost">
             <ArrowLeft size={12} /> BACK
           </button>
@@ -97,7 +97,7 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
 
       {/* CONTENT */}
       <div className="relative z-10 flex-1 w-full overflow-y-auto">
-        <div className="w-full max-w-2xl mx-auto px-6 py-6">
+        <div className="w-full max-w-2xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
 
           {loading ? (
             <div className="text-center py-20">
@@ -117,13 +117,13 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
           ) : (
             <div className="space-y-2">
               {/* Header */}
-              <div className="flex items-center gap-3 px-4 py-2 text-[9px] font-semibold uppercase tracking-wider" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>
-                <div className="w-8 text-center">RANK</div>
-                <div className="flex-1">PLAYER</div>
-                <div className="w-16 text-center">XP</div>
-                <div className="w-14 text-center">CASES</div>
-                <div className="w-14 text-center">AVG %</div>
-                <div className="w-10 text-center">
+              <div className="flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-2 text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>
+                <div className="w-6 sm:w-8 text-center shrink-0">RANK</div>
+                <div className="flex-1 min-w-0">PLAYER</div>
+                <div className="w-12 sm:w-16 text-center shrink-0">XP</div>
+                <div className="hidden sm:block w-14 text-center shrink-0">CASES</div>
+                <div className="w-12 sm:w-14 text-center shrink-0">AVG</div>
+                <div className="hidden sm:block w-10 text-center shrink-0">
                   <Flame size={9} />
                 </div>
               </div>
@@ -138,44 +138,44 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.03 }}
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+                    className="flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 rounded-lg transition-all"
                     style={{
                       background: isMe ? "rgba(37,99,235,0.08)" : getRankColor(entry.rank),
                       border: isMe ? "1px solid var(--accent-primary-border)" : "1px solid transparent",
                     }}
                   >
-                    <div className="w-8 flex items-center justify-center">
+                    <div className="w-6 sm:w-8 flex items-center justify-center shrink-0">
                       {getRankIcon(entry.rank)}
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold truncate" style={{ color: isMe ? "var(--accent-gold)" : "var(--text-primary)" }}>
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <span className="text-[11px] sm:text-xs font-semibold truncate" style={{ color: isMe ? "var(--accent-gold)" : "var(--text-primary)" }}>
                           {entry.name} {isMe && "(You)"}
                         </span>
-                        <span className="tag text-[8px]" style={{ color: "var(--text-ghost)", background: "var(--bg-surface)", border: "1px solid var(--border)" }}>
+                        <span className="tag text-[7px] sm:text-[8px] hidden sm:inline-flex" style={{ color: "var(--text-ghost)", background: "var(--bg-surface)", border: "1px solid var(--border)" }}>
                           {level.title}
                         </span>
                       </div>
-                      <p className="text-[9px]" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>
+                      <p className="text-[8px] sm:text-[9px] truncate" style={{ fontFamily: "var(--font-mono)", color: "var(--text-ghost)" }}>
                         {entry.branch}
                       </p>
                     </div>
 
-                    <div className="w-16 text-center">
-                      <span className="text-xs font-bold" style={{ fontFamily: "var(--font-mono)", color: "var(--accent-gold)" }}>
+                    <div className="w-12 sm:w-16 text-center shrink-0">
+                      <span className="text-[10px] sm:text-xs font-bold" style={{ fontFamily: "var(--font-mono)", color: "var(--accent-gold)" }}>
                         {entry.totalXP.toLocaleString()}
                       </span>
                     </div>
 
-                    <div className="w-14 text-center">
+                    <div className="hidden sm:block w-14 text-center shrink-0">
                       <span className="text-xs" style={{ fontFamily: "var(--font-mono)", color: "var(--text-primary)" }}>
                         {entry.casesCompleted}
                       </span>
                     </div>
 
-                    <div className="w-14 text-center">
-                      <span className="text-xs font-semibold" style={{
+                    <div className="w-12 sm:w-14 text-center shrink-0">
+                      <span className="text-[10px] sm:text-xs font-semibold" style={{
                         fontFamily: "var(--font-mono)",
                         color: entry.avgScore >= 70 ? "var(--success)" : entry.avgScore >= 50 ? "var(--warn)" : "var(--danger)",
                       }}>
@@ -183,7 +183,7 @@ export function Leaderboard({ onClose }: { onClose: () => void }) {
                       </span>
                     </div>
 
-                    <div className="w-10 text-center">
+                    <div className="hidden sm:block w-10 text-center shrink-0">
                       {entry.streak > 0 && (
                         <span className="text-xs flex items-center justify-center gap-0.5" style={{ fontFamily: "var(--font-mono)", color: "#DC2626" }}>
                           <Flame size={9} /> {entry.streak}

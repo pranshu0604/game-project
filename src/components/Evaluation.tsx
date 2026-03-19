@@ -102,19 +102,19 @@ export function Evaluation() {
 
       {/* TOP BAR */}
       <div className="relative z-10 shrink-0 glass-panel" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="px-6 py-3 flex items-center justify-between">
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "4px", color: "var(--text-ghost)" }}>
-            DEBRIEF — WAR ROOM
+        <div className="px-3 sm:px-6 py-3 flex items-center justify-between gap-2 flex-wrap">
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "2px", color: "var(--text-ghost)" }}>
+            DEBRIEF
           </span>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <span className="tag" style={{ color: diff.color, background: `${diff.color}12`, border: `1px solid ${diff.color}25` }}>
               {diff.label}
             </span>
-            <span className="tag" style={{ color: catColor, background: `${catColor}08`, border: `1px solid ${catColor}20` }}>
+            <span className="tag hidden sm:inline-flex" style={{ color: catColor, background: `${catColor}08`, border: `1px solid ${catColor}20` }}>
               {sc.category.replace("-", " ")}
             </span>
           </div>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-ghost)" }}>
+          <span className="hidden sm:inline" style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-ghost)" }}>
             {ev.evaluatedBy === "ai" ? "AI EVALUATED" : "RULE-BASED"}
           </span>
         </div>
@@ -122,7 +122,7 @@ export function Evaluation() {
 
       {/* SCROLLABLE CONTENT */}
       <div className="relative z-10 flex-1 w-full overflow-y-auto">
-        <div className="w-full max-w-4xl mx-auto px-8 py-8">
+        <div className="w-full max-w-4xl mx-auto px-3 sm:px-8 py-4 sm:py-8">
 
           {/* ── VERDICT ── */}
           <motion.div
@@ -132,10 +132,10 @@ export function Evaluation() {
           >
             {/* Score */}
             <div className="mb-4">
-              <span className="text-6xl font-bold" style={{ fontFamily: "var(--font-display)", color: gradeColor }}>
+              <span className="text-4xl sm:text-6xl font-bold" style={{ fontFamily: "var(--font-display)", color: gradeColor }}>
                 <AnimatedNumber value={ev.percentage} />
               </span>
-              <span className="text-2xl ml-1" style={{ fontFamily: "var(--font-display)", color: "var(--text-ghost)" }}>/100</span>
+              <span className="text-xl sm:text-2xl ml-1" style={{ fontFamily: "var(--font-display)", color: "var(--text-ghost)" }}>/100</span>
             </div>
 
             {/* Grade Badge */}
@@ -175,7 +175,7 @@ export function Evaluation() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="nexus-card p-6 mb-6"
+            className="nexus-card p-4 sm:p-6 mb-4 sm:mb-6"
             style={{ borderTop: "2px solid var(--accent-gold-border)" }}
           >
             <div className="flex items-center gap-2 mb-5">
@@ -228,7 +228,7 @@ export function Evaluation() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.35 }}
-            className="nexus-card p-6 mb-6"
+            className="nexus-card p-4 sm:p-6 mb-4 sm:mb-6"
           >
             <div className="flex items-center gap-2 mb-4">
               <Target size={14} style={{ color: "var(--accent-gold)" }} />
@@ -236,7 +236,7 @@ export function Evaluation() {
                 PERFORMANCE RADAR
               </span>
             </div>
-            <div style={{ width: "100%", height: 300 }}>
+            <div className="w-full h-55 sm:h-75">
               <ResponsiveContainer>
                 <RadarChart data={ev.skills.map(s => ({
                   skill: s.skill.length > 12 ? s.skill.slice(0, 12) + "…" : s.skill,
@@ -280,7 +280,7 @@ export function Evaluation() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="nexus-card p-5"
+              className="nexus-card p-3 sm:p-5"
               style={{ borderTop: "2px solid rgba(22,163,74,0.3)" }}
             >
               <div className="flex items-center gap-2 mb-3">
@@ -308,7 +308,7 @@ export function Evaluation() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.45 }}
-              className="nexus-card p-5"
+              className="nexus-card p-3 sm:p-5"
               style={{ borderTop: "2px solid rgba(217,119,6,0.3)" }}
             >
               <div className="flex items-center gap-2 mb-3">
@@ -340,7 +340,7 @@ export function Evaluation() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="nexus-card p-5"
+                  className="nexus-card p-3 sm:p-5"
                   style={{ borderTop: "2px solid rgba(22,163,74,0.3)" }}
                 >
                   <div className="flex items-center gap-2 mb-3">
@@ -359,7 +359,7 @@ export function Evaluation() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.55 }}
-                  className="nexus-card p-5"
+                  className="nexus-card p-3 sm:p-5"
                   style={{ borderTop: "2px solid rgba(220,38,38,0.3)" }}
                 >
                   <div className="flex items-center gap-2 mb-3">
@@ -381,7 +381,7 @@ export function Evaluation() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.55 }}
-            className="nexus-card p-5 mb-6"
+            className="nexus-card p-4 sm:p-5 mb-4 sm:mb-6"
             style={{ borderTop: hasViolations ? "2px solid rgba(220,38,38,0.3)" : "2px solid rgba(22,163,74,0.3)" }}
           >
             <div className="flex items-center gap-2 mb-3">
@@ -419,7 +419,7 @@ export function Evaluation() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="nexus-card p-5 mb-6"
+            className="nexus-card p-4 sm:p-5 mb-4 sm:mb-6"
           >
             <div className="flex items-center gap-2 mb-4">
               <MessageSquare size={13} style={{ color: "var(--accent-gold)" }} />
@@ -459,7 +459,7 @@ export function Evaluation() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.63 }}
-              className="nexus-card p-5 mb-6"
+              className="nexus-card p-4 sm:p-5 mb-4 sm:mb-6"
               style={{ borderTop: "2px solid rgba(37,99,235,0.2)" }}
             >
               <div className="flex items-center gap-2 mb-4">
@@ -502,7 +502,7 @@ export function Evaluation() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.64 }}
-              className="nexus-card p-5 mb-6"
+              className="nexus-card p-4 sm:p-5 mb-4 sm:mb-6"
             >
               <div className="flex items-center gap-2 mb-3">
                 <TrendingUp size={13} style={{ color: "var(--accent-gold)" }} />
@@ -521,7 +521,7 @@ export function Evaluation() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.65 }}
-            className="case-file p-5 mb-6"
+            className="case-file p-4 sm:p-5 mb-4 sm:mb-6"
           >
             <div className="flex items-center gap-2 mb-3">
               <Briefcase size={13} style={{ color: "var(--accent-gold)" }} />
@@ -549,7 +549,7 @@ export function Evaluation() {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.7 }}
-        className="relative z-10 shrink-0 glass-panel px-6 py-4 flex items-center justify-center gap-4"
+        className="relative z-10 shrink-0 glass-panel px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-center gap-2 sm:gap-4 flex-wrap"
         style={{ borderTop: "1px solid var(--border)" }}
       >
         <motion.button

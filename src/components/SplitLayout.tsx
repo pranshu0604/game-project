@@ -65,7 +65,7 @@ export function SplitLayout({
               <X size={14} />
             </button>
           </div>
-          <div className="p-4 space-y-0">
+          <div className="p-2 sm:p-4 space-y-0">
             {insightsPanel}
           </div>
         </div>

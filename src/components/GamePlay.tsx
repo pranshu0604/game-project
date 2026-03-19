@@ -351,11 +351,11 @@ export function GamePlay() {
   // ── TOP BAR (simplified — mood/compliance/progress moved to insights) ──
   const topBar = (
     <div className="shrink-0 w-full relative z-10 glass-panel" style={{ borderBottom: "1px solid var(--border)" }}>
-      <div className="px-6 py-2.5 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Briefcase size={13} style={{ color: "var(--accent-gold)" }} />
-          <div>
-            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>{sc.title}</p>
+      <div className="px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <Briefcase size={13} className="shrink-0" style={{ color: "var(--accent-gold)" }} />
+          <div className="min-w-0">
+            <p className="text-xs font-bold truncate" style={{ color: "var(--text-primary)" }}>{sc.title}</p>
             <p className="text-[10px]" style={{ fontFamily: "var(--font-mono)", color: "var(--text-secondary)" }}>vs {sc.customer.name}</p>
           </div>
         </div>
@@ -371,7 +371,7 @@ export function GamePlay() {
   const chatArea = (
     <div className="w-full h-full relative">
       <Particles count={4} />
-      <div className="w-full max-w-2xl mx-auto px-6 py-6 space-y-4 relative z-10" style={{ minHeight: "100%" }}>
+      <div className="w-full max-w-2xl mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-3 sm:space-y-4 relative z-10" style={{ minHeight: "100%" }}>
         {messages.filter(m => m.role !== "system").map((msg) => (
           <motion.div key={msg.id}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
@@ -386,14 +386,14 @@ export function GamePlay() {
                 <p className="text-xs leading-relaxed" style={{ color: "var(--text-primary)" }}>{msg.content}</p>
               </motion.div>
             ) : msg.role === "customer" ? (
-              <div className="max-w-[85%]">
+              <div className="max-w-[95%] sm:max-w-[85%]">
                 <p className="text-[9px] font-semibold uppercase tracking-widest mb-1.5" style={{ fontFamily: "var(--font-mono)", color: catColor }}>{sc.customer.name}</p>
                 <div className="chat-customer p-4">
                   <p className="text-sm leading-relaxed" style={{ color: "var(--text-primary)" }}>{msg.content}</p>
                 </div>
               </div>
             ) : (
-              <div className="max-w-[85%] ml-auto">
+              <div className="max-w-[95%] sm:max-w-[85%] ml-auto">
                 <p className="text-[9px] font-semibold uppercase tracking-widest mb-1.5 text-right" style={{ fontFamily: "var(--font-mono)", color: "var(--accent-gold)" }}>YOU (RM)</p>
                 <div className="chat-user p-4">
                   <p className="text-sm leading-relaxed" style={{ color: "var(--text-primary)" }}>{msg.content}</p>
@@ -427,14 +427,14 @@ export function GamePlay() {
   // ── BOTTOM INPUT ──
   const bottomBar = (
     <div className="w-full" style={{ background: "linear-gradient(180deg, transparent, var(--bg-void) 20%)" }}>
-      <div className="w-full max-w-2xl mx-auto px-6 pb-5 pt-3">
+      <div className="w-full max-w-2xl mx-auto px-3 sm:px-6 pb-4 sm:pb-5 pt-2 sm:pt-3">
         <div className="relative rounded-xl transition-all"
           style={{
             background: "var(--bg-surface)",
             border: `1px solid ${waitingForUser ? "var(--accent-gold-border)" : "var(--border)"}`,
             boxShadow: waitingForUser ? "0 0 20px rgba(37,99,235,0.06), 0 4px 24px rgba(0,0,0,0.08)" : "0 4px 24px rgba(0,0,0,0.06)",
           }}>
-          <div className="flex items-end gap-3 px-5 pt-4 pb-2">
+          <div className="flex items-end gap-2 sm:gap-3 px-3 sm:px-5 pt-3 sm:pt-4 pb-2">
             <textarea
               ref={inputRef}
               value={input}
@@ -462,7 +462,7 @@ export function GamePlay() {
               <ArrowUp size={16} strokeWidth={2.5} />
             </motion.button>
           </div>
-          <div className="px-5 pb-3 flex items-center justify-between">
+          <div className="px-3 sm:px-5 pb-3 flex items-center justify-between">
             {waitingForUser ? (
               <div className="flex items-center gap-1.5">
                 <ChevronRight size={9} style={{ color: "var(--success)" }} />

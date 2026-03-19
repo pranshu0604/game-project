@@ -51,13 +51,13 @@ export function Lobby() {
 
       {/* NAV BAR */}
       <div className="relative z-10 shrink-0 glass-panel" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="px-8 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="px-4 sm:px-8 py-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center"
               style={{ background: "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" }}>
               <Briefcase size={14} color="#FFFFFF" />
             </div>
-            <div>
+            <div className="hidden sm:block">
               <span className="font-bold text-sm tracking-wide" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>
                 NEXUS BANK
               </span>
@@ -67,8 +67,8 @@ export function Lobby() {
             </div>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 sm:gap-6 flex-wrap justify-end min-w-0">
+            <div className="hidden md:flex items-center gap-3">
               <div className="text-right">
                 <p className="text-[10px] font-semibold" style={{ fontFamily: "var(--font-mono)", color: "var(--accent-gold)" }}>
                   {level.title} · Lv {level.level}
@@ -84,13 +84,13 @@ export function Lobby() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 text-[10px]" style={{ fontFamily: "var(--font-mono)", color: "var(--text-secondary)" }}>
-              <span className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2 sm:gap-4 text-[10px] flex-wrap" style={{ fontFamily: "var(--font-mono)", color: "var(--text-secondary)" }}>
+              <span className="hidden sm:flex items-center gap-1.5">
                 <Briefcase size={10} style={{ color: "var(--accent-gold)" }} />
                 <strong style={{ color: "var(--text-primary)" }}>{career.casesCompleted}</strong> cases
               </span>
               {career.streak > 0 && (
-                <span className="flex items-center gap-1">
+                <span className="hidden sm:flex items-center gap-1">
                   <Flame size={10} style={{ color: "#DC2626" }} />
                   <strong style={{ color: "var(--text-primary)" }}>{career.streak}</strong>
                 </span>
@@ -109,10 +109,11 @@ export function Lobby() {
                 style={{ background: "rgba(132,204,22,0.08)", border: "1px solid rgba(132,204,22,0.15)" }}
               >
                 <Wrench size={10} style={{ color: "#65A30D" }} />
-                <span style={{ color: "#65A30D" }}>ADMIN</span>
+                <span className="hidden sm:inline" style={{ color: "#65A30D" }}>ADMIN</span>
+                <Wrench size={10} className="sm:hidden" style={{ color: "#65A30D" }} />
               </button>
               {career.playerName && (
-                <span className="flex items-center gap-1.5" style={{ color: "var(--text-primary)" }}>
+                <span className="hidden md:flex items-center gap-1.5" style={{ color: "var(--text-primary)" }}>
                   {career.playerName}
                 </span>
               )}
@@ -129,16 +130,16 @@ export function Lobby() {
       </div>
 
       {/* MAIN */}
-      <div className="relative z-10 flex-1 w-full flex flex-col items-center overflow-y-auto py-8 px-8">
+      <div className="relative z-10 flex-1 w-full flex flex-col items-center overflow-y-auto py-4 sm:py-8 px-3 sm:px-8">
         <div className="w-full" style={{ maxWidth: 960 }}>
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-between mb-6"
+            className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3"
           >
             <div>
-              <h2 className="text-xl font-bold tracking-wide" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>
+              <h2 className="text-lg sm:text-xl font-bold tracking-wide" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>
                 Case Files
               </h2>
               <p className="text-xs mt-1" style={{ color: "var(--text-secondary)" }}>
@@ -146,7 +147,7 @@ export function Lobby() {
               </p>
             </div>
 
-            <div className="flex items-center gap-1 p-1 rounded-lg" style={{ background: "var(--bg-surface)", border: "1px solid var(--border)" }}>
+            <div className="flex items-center gap-1 p-1 rounded-lg flex-wrap w-full sm:w-auto" style={{ background: "var(--bg-surface)", border: "1px solid var(--border)" }}>
               {CATEGORIES.map((cat) => {
                 const Icon = categoryIcons[cat.id] || LayoutGrid;
                 const active = selectedCategory === cat.id;
@@ -154,13 +155,13 @@ export function Lobby() {
                   <button
                     key={cat.id}
                     onClick={() => setCategory(cat.id)}
-                    className="px-3 py-1.5 rounded-md text-[10px] font-semibold uppercase tracking-wider transition-all flex items-center gap-1.5"
+                    className="px-2 sm:px-3 py-1.5 rounded-md text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider transition-all flex items-center gap-1"
                     style={{
                       color: active ? "#FFFFFF" : "var(--text-secondary)",
                       background: active ? "linear-gradient(135deg, var(--accent-gold), var(--accent-gold-glow))" : "transparent",
                     }}
                   >
-                    <Icon size={10} /> {cat.label}
+                    <Icon size={10} /> <span className="hidden sm:inline">{cat.label}</span><span className="sm:hidden">{cat.id === "all" ? "All" : cat.label.slice(0, 4)}</span>
                   </button>
                 );
               })}
@@ -183,7 +184,7 @@ export function Lobby() {
                   onClick={() => selectScenario(scenario)}
                   onMouseEnter={() => setHoveredId(scenario.id)}
                   onMouseLeave={() => setHoveredId(null)}
-                  className="case-file cursor-pointer px-5 py-4 flex items-center gap-4"
+                  className="case-file cursor-pointer px-3 sm:px-5 py-3 sm:py-4 flex items-center gap-3 sm:gap-4"
                   style={{
                     borderColor: isHovered ? "var(--border-accent)" : "var(--border)",
                     boxShadow: isHovered ? "0 0 20px rgba(37,99,235,0.08), 0 8px 32px rgba(0,0,0,0.08)" : "none",
@@ -248,7 +249,7 @@ export function Lobby() {
         </div>
       </div>
 
-      <div className="relative z-10 shrink-0 glass-panel px-8 py-2 flex items-center justify-between"
+      <div className="relative z-10 shrink-0 glass-panel px-4 sm:px-8 py-2 flex items-center justify-between"
         style={{ fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: "3px", color: "var(--text-ghost)", borderTop: "1px solid var(--border)" }}>
         <span>NEXUS BANK v2.0</span>
         <span>{filtered.length} CASES AVAILABLE</span>
